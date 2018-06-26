@@ -10,7 +10,8 @@ output:
 
 ##Synopsis The purpose of this project was to practice:
 
-```{r}
+
+```r
 setwd("D:/CourseraDataSciences/reproducible_research/Week2/RepData_PeerAssessment1")
 
 knitr::opts_chunk$set(echo = TRUE, cache = FALSE)
@@ -18,38 +19,41 @@ knitr::opts_chunk$set(echo = TRUE, cache = FALSE)
 
 ## Loading and preprocessing the data
 
-```{r}
 
+```r
 activity <- read.csv("activity.csv", header = TRUE)
 ```
 
 ## What is mean total number of steps taken per day?
 
-```{r}
+
+```r
 StepsPerDay <- tapply(activity$steps, activity$date, sum)
 ```
 
 # Make a histogram of the total number of steps taken each day
 
-```{r}
+
+```r
 hist(StepsPerDay, xlab = "Total Number of Steps", main = "Histogram: Tptal Steps per Day")
 ```
 
+![](PA1_template_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
+
 #calculate and report the mean and median of the total number of steps taken per day
 
-```{r}
 
+```r
 MeanPerDay <- mean(StepsPerDay, na.rm = TRUE)
 MedianPerDay <- median(StepsPerDay, na.rm = TRUE)
-
 ```
 
 ## What is the average daily activity pattern?
 
 # Make a time series plot of the 5-minute interval and the average number of steps taken, averaged across all days
 
-```{r}
 
+```r
 StepsPerInterval <- tapply(activity$steps, activity$interval, mean, na.rm = TRUE)
 plot(as.numeric(names(StepsPerInterval)), 
 	StepsPerInterval, 
@@ -57,12 +61,14 @@ plot(as.numeric(names(StepsPerInterval)),
 	ylab = "Steps", 
 	main = "Average Daily Activity Pattern", 
 	type = "l")
-
 ```
+
+![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
 	
 	# Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
-```{r}
+
+```r
 maxInterval <- names(sort(StepsPerInterval, decreasing = TRUE)[1])
 maxSteps <- sort(StepsPerInterval, decreasing = TRUE)[1]
 ```
@@ -71,8 +77,8 @@ maxSteps <- sort(StepsPerInterval, decreasing = TRUE)[1]
 
 #Calculate and report the total number of missing values in the dataset
 
-```{r}
 
+```r
 NA.vals <- sum(is.na(activity$steps))
 ```
 
@@ -80,23 +86,23 @@ NA.vals <- sum(is.na(activity$steps))
 #I will fill in missing data with the mean number of steps across all days with available data for that particular interval.
 #Create a new dataset that is equal to the original dataset but with the missing data filled in.
 
-```{r}
 
+```r
 StepsPerInterval <- tapply(activity$steps, activity$interval, mean, na.rm = TRUE)
 ```
 
 
 # split activity data by interval
 
-```{r}
 
+```r
 activity.split <- split(activity, activity$interval)
 ```
 
 # fill in missing data for each interval
 
-```{r}
 
+```r
 for(i in 1:length(activity.split)){
 	activity.split[[i]]$steps[is.na(activity.split[[i]]$steps)] <- StepsPerInterval[i]
 }
@@ -107,11 +113,15 @@ activity.imputed <- activity.imputed[order(activity.imputed$date) ,]
 #Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day.
 
 
-```{r}
 
+```r
 StepsPerDay.imputed <- tapply(activity.imputed$steps, activity.imputed$date, sum)
 hist(StepsPerDay.imputed, xlab = "Number of Steps", main = "Histogram: Steps per Day (Imputed data)")
+```
 
+![](PA1_template_files/figure-html/unnamed-chunk-12-1.png)<!-- -->
+
+```r
 MeanPerDay.imputed <- mean(StepsPerDay.imputed, na.rm = TRUE)
 MedianPerDay.imputed <- median(StepsPerDay.imputed, na.rm = TRUE)
 ```
@@ -119,35 +129,35 @@ MedianPerDay.imputed <- median(StepsPerDay.imputed, na.rm = TRUE)
 ## Are there differences in activity patterns between weekdays and weekends?
 #Create a new factor variable in the dataset with two levels - “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.
 
-```{r}
 
+```r
 activity.imputed$day <- ifelse(weekdays(as.Date(activity.imputed$date)) == "Saturday" | weekdays(as.Date(activity.imputed$date)) == "Sunday", "weekend", "weekday")
 ```
 
 # Make a panel plot containing a time series plot of the 5-minute interval and the average number of steps taken, averaged across all weekday days or weekend days.
 # Calculate average steps per interval for weekends
 
-```{r}
 
+```r
 StepsPerInterval.weekend <- tapply(activity.imputed[activity.imputed$day == "weekend" ,]$steps, activity.imputed[activity.imputed$day == "weekend" ,]$interval, mean, na.rm = TRUE)
 ```
 
 # Calculate average steps per interval for weekdays
 
-```{r}
 
+```r
 StepsPerInterval.weekday <- tapply(activity.imputed[activity.imputed$day == "weekday" ,]$steps, activity.imputed[activity.imputed$day == "weekday" ,]$interval, mean, na.rm = TRUE)
 ```
 
 # Set a 2 panel plot
-```{r}
 
+```r
 par(mfrow=c(1,2))
-``` 
+```
 # Plot weekday activity
 
-```{r}
 
+```r
 plot(as.numeric(names(StepsPerInterval.weekday)), 
 	StepsPerInterval.weekday, 
 	xlab = "Interval", 
@@ -156,9 +166,12 @@ plot(as.numeric(names(StepsPerInterval.weekday)),
 	type = "l")
 ```
 
+![](PA1_template_files/figure-html/unnamed-chunk-17-1.png)<!-- -->
+
 # Plot weekend activity
 
-```{r}
+
+```r
 plot(as.numeric(names(StepsPerInterval.weekend)), 
 	StepsPerInterval.weekend, 
 	xlab = "Interval", 
@@ -167,40 +180,47 @@ plot(as.numeric(names(StepsPerInterval.weekend)),
 	type = "l")
 ```
 
+![](PA1_template_files/figure-html/unnamed-chunk-18-1.png)<!-- -->
+
 # Calculate average steps per interval for weekends
 
-```{r}
+
+```r
 StepsPerInterval.weekend <- tapply(activity.imputed[activity.imputed$day == "weekend" ,]$steps, activity.imputed[activity.imputed$day == "weekend" ,]$interval, mean, na.rm = TRUE)
 ```
 
 # Calculate average steps per interval for weekdays
 
-```{r}
+
+```r
 StepsPerInterval.weekday <- tapply(activity.imputed[activity.imputed$day == "weekday" ,]$steps, activity.imputed[activity.imputed$day == "weekday" ,]$interval, mean, na.rm = TRUE)
 ```
 
 # Set a 2 panel plot
 
-```{r}
-par(mfrow=c(1,2))
 
+```r
+par(mfrow=c(1,2))
 ```
 
 # Plot weekday activity
 
-```{r}
+
+```r
   plot(as.numeric(names(StepsPerInterval.weekday)), 
 	StepsPerInterval.weekday, 
 	xlab = "Interval", 
 	ylab = "Steps", 
 	main = "Activity Pattern (Weekdays)", 
       type = "l")
-
 ```
+
+![](PA1_template_files/figure-html/unnamed-chunk-22-1.png)<!-- -->
  
 # Plot weekend activity
 
-```{r}
+
+```r
 plot(as.numeric(names(StepsPerInterval.weekend)), 
 	StepsPerInterval.weekend, 
 	xlab = "Interval", 
@@ -208,3 +228,5 @@ plot(as.numeric(names(StepsPerInterval.weekend)),
 	main = "Activity Pattern (Weekends)", 
 	type = "l") 
 ```
+
+![](PA1_template_files/figure-html/unnamed-chunk-23-1.png)<!-- -->

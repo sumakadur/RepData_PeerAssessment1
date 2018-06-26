@@ -80,6 +80,10 @@ Show any code that is needed to
 
 1. Load the data (i.e. `read.csv()`)
 
+setwd("C:/Users/Sum/Desktop/Coursera Data Sciences/reproducible-research/Week 2/RepData_PeerAssessment1")
+knitr::opts_chunk$set(echo = TRUE, cache = FALSE)
+activity <- read.csv("activity.csv", header = TRUE)
+
 2. Process/transform the data (if necessary) into a format suitable for your analysis
 
 
@@ -88,10 +92,18 @@ Show any code that is needed to
 For this part of the assignment, you can ignore the missing values in
 the dataset.
 
+StepsPerDay <- tapply(activity$steps, activity$date, sum)
+
 1. Make a histogram of the total number of steps taken each day
+
+hist(StepsPerDay, xlab = "Number of Steps", main = "Histogram: Steps per Day")
+
+
 
 2. Calculate and report the **mean** and **median** total number of steps taken per day
 
+MeanPerDay <- mean(StepsPerDay, na.rm = TRUE)
+MedianPerDay <- median(StepsPerDay, na.rm = TRUE)
 
 ### What is the average daily activity pattern?
 
