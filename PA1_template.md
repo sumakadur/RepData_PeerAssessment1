@@ -23,14 +23,14 @@ knitr::opts_chunk$set(echo = TRUE, cache = FALSE)
 activity <- read.csv("activity.csv", header = TRUE)
 ```
 
-## What is mean total number of steps taken per day?
+# What is mean total number of steps taken per day?
 
 
 ```r
 StepsPerDay <- tapply(activity$steps, activity$date, sum)
 ```
 
-# Make a histogram of the total number of steps taken each day
+##Make a histogram of the total number of steps taken each day
 
 
 ```r
@@ -39,7 +39,7 @@ hist(StepsPerDay, xlab = "Total Number of Steps", main = "Histogram: Tptal Steps
 
 ![](PA1_template_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
 
-#calculate and report the mean and median of the total number of steps taken per day
+##calculate and report the mean and median of the total number of steps taken per day
 
 
 ```r
@@ -70,9 +70,9 @@ MedianPerDay
 ## [1] 10765
 ```
 
-## What is the average daily activity pattern?
+# What is the average daily activity pattern?
 
-# Make a time series plot of the 5-minute interval and the average number of steps taken, averaged across all days
+## Make a time series plot of the 5-minute interval and the average number of steps taken, averaged across all days
 
 
 ```r
@@ -87,7 +87,7 @@ plot(as.numeric(names(StepsPerInterval)),
 
 ![](PA1_template_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
 	
-	# Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
+#Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
 
 ```r
@@ -102,7 +102,7 @@ maxInterval
 ```
 
 
-## Inputing missing values
+#Inputing missing values
 
 #Calculate and report the total number of missing values in the dataset
 
@@ -155,8 +155,8 @@ MeanPerDay.imputed <- mean(StepsPerDay.imputed, na.rm = TRUE)
 MedianPerDay.imputed <- median(StepsPerDay.imputed, na.rm = TRUE)
 ```
 
-## Are there differences in activity patterns between weekdays and weekends?
-#Create a new factor variable in the dataset with two levels - ?weekday? and ?weekend? indicating whether a given date is a weekday or weekend day.
+# Are there differences in activity patterns between weekdays and weekends?
+##Create a new factor variable in the dataset with two levels - ?weekday? and ?weekend? indicating whether a given date is a weekday or weekend day.
 
 
 ```r
@@ -164,14 +164,14 @@ activity.imputed$day <- ifelse(weekdays(as.Date(activity.imputed$date)) == "Satu
 ```
 
 # Make a panel plot containing a time series plot of the 5-minute interval and the average number of steps taken, averaged across all weekday days or weekend days.
-# Calculate average steps per interval for weekends
+## Calculate average steps per interval for weekends
 
 
 ```r
 StepsPerInterval.weekend <- tapply(activity.imputed[activity.imputed$day == "weekend" ,]$steps, activity.imputed[activity.imputed$day == "weekend" ,]$interval, mean, na.rm = TRUE)
 ```
 
-# Calculate average steps per interval for weekdays
+##Calculate average steps per interval for weekdays
 
 
 ```r
@@ -179,21 +179,21 @@ StepsPerInterval.weekday <- tapply(activity.imputed[activity.imputed$day == "wee
 ```
 
 
-# Calculate average steps per interval for weekends
+##Calculate average steps per interval for weekends
 
 
 ```r
 StepsPerInterval.weekend <- tapply(activity.imputed[activity.imputed$day == "weekend" ,]$steps, activity.imputed[activity.imputed$day == "weekend" ,]$interval, mean, na.rm = TRUE)
 ```
 
-# Calculate average steps per interval for weekdays
+##Calculate average steps per interval for weekdays
 
 
 ```r
 StepsPerInterval.weekday <- tapply(activity.imputed[activity.imputed$day == "weekday" ,]$steps, activity.imputed[activity.imputed$day == "weekday" ,]$interval, mean, na.rm = TRUE)
 ```
 
-# Set a 2 panel plot
+## Set a 2 panel plot
 
 
 ```r
