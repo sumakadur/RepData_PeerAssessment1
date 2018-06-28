@@ -218,3 +218,5 @@ plot(as.numeric(names(StepsPerInterval.weekend)),
 
 
 
+
+
