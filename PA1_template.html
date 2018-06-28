@@ -243,7 +243,7 @@ MedianPerDay.imputed &lt;- median(StepsPerDay.imputed, na.rm = TRUE)</code></pre
 <h2>Set a 2 panel plot</h2>
 <pre class="r"><code>par(mfrow=c(1,2))
 
-  plot(as.numeric(names(StepsPerInterval.weekday)), 
+plot(as.numeric(names(StepsPerInterval.weekday)), 
     StepsPerInterval.weekday, 
     xlab = &quot;Interval&quot;, 
     ylab = &quot;Steps&quot;, 

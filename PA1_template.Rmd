@@ -171,9 +171,10 @@ StepsPerInterval.weekday <- tapply(activity.imputed[activity.imputed$day == "wee
 ## Set a 2 panel plot
 
 ```{r}
+
 par(mfrow=c(1,2))
 
-  plot(as.numeric(names(StepsPerInterval.weekday)), 
+plot(as.numeric(names(StepsPerInterval.weekday)), 
 	StepsPerInterval.weekday, 
 	xlab = "Interval", 
 	ylab = "Steps", 
@@ -186,6 +187,7 @@ plot(as.numeric(names(StepsPerInterval.weekend)),
 	ylab = "Steps", 
 	main = "Activity Pattern (Weekends)", 
 	type = "l") 
+
 ```
 
 

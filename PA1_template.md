@@ -199,7 +199,7 @@ StepsPerInterval.weekday <- tapply(activity.imputed[activity.imputed$day == "wee
 ```r
 par(mfrow=c(1,2))
 
-  plot(as.numeric(names(StepsPerInterval.weekday)), 
+plot(as.numeric(names(StepsPerInterval.weekday)), 
 	StepsPerInterval.weekday, 
 	xlab = "Interval", 
 	ylab = "Steps", 
