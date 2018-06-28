@@ -155,33 +155,6 @@ StepsPerInterval.weekend <- tapply(activity.imputed[activity.imputed$day == "wee
 StepsPerInterval.weekday <- tapply(activity.imputed[activity.imputed$day == "weekday" ,]$steps, activity.imputed[activity.imputed$day == "weekday" ,]$interval, mean, na.rm = TRUE)
 ```
 
-# Set a 2 panel plot
-```{r}
-
-par(mfrow=c(1,2))
-``` 
-# Plot weekday activity
-
-```{r}
-
-plot(as.numeric(names(StepsPerInterval.weekday)), 
-	StepsPerInterval.weekday, 
-	xlab = "Interval", 
-	ylab = "Steps", 
-	main = "Activity Pattern (Weekdays)", 
-	type = "l")
-```
-
-# Plot weekend activity
-
-```{r}
-plot(as.numeric(names(StepsPerInterval.weekend)), 
-	StepsPerInterval.weekend, 
-	xlab = "Interval", 
-	ylab = "Steps", 
-	main = "Activity Pattern (Weekends)", 
-	type = "l")
-```
 
 # Calculate average steps per interval for weekends
 
@@ -206,7 +179,6 @@ par(mfrow=c(1,2))
 	ylab = "Steps", 
 	main = "Activity Pattern (Weekdays)", 
       type = "l")
-
 
 plot(as.numeric(names(StepsPerInterval.weekend)), 
 	StepsPerInterval.weekend, 
