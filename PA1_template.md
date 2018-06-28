@@ -215,3 +215,6 @@ plot(as.numeric(names(StepsPerInterval.weekend)),
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-20-1.png)<!-- -->
+
+
+

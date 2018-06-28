@@ -187,3 +187,6 @@ plot(as.numeric(names(StepsPerInterval.weekend)),
 	main = "Activity Pattern (Weekends)", 
 	type = "l") 
 ```
+
+
+
