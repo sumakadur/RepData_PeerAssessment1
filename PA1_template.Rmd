@@ -8,7 +8,6 @@ output:
 
 ##About This was the first project for the Reproducible Research course in Coursera's Data Science specialization track. The purpose of the project was to answer a series of questions using data collected from a FitBit.
 
-##Synopsis The purpose of this project was to practice:
 
 ```{r}
 setwd("D:/CourseraDataSciences/reproducible_research/Week2/RepData_PeerAssessment1")
@@ -41,6 +40,19 @@ hist(StepsPerDay, xlab = "Total Number of Steps", main = "Histogram: Tptal Steps
 
 MeanPerDay <- mean(StepsPerDay, na.rm = TRUE)
 MedianPerDay <- median(StepsPerDay, na.rm = TRUE)
+```
+
+Mean Per day
+
+
+```{r}
+MeanPerDay
+```
+
+Median per day
+
+```{r}
+MedianPerDay
 
 ```
 
@@ -65,7 +77,11 @@ plot(as.numeric(names(StepsPerInterval)),
 ```{r}
 maxInterval <- names(sort(StepsPerInterval, decreasing = TRUE)[1])
 maxSteps <- sort(StepsPerInterval, decreasing = TRUE)[1]
+
+maxInterval
+
 ```
+
 
 ## Inputing missing values
 
@@ -117,7 +133,7 @@ MedianPerDay.imputed <- median(StepsPerDay.imputed, na.rm = TRUE)
 ```
 
 ## Are there differences in activity patterns between weekdays and weekends?
-#Create a new factor variable in the dataset with two levels - “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.
+#Create a new factor variable in the dataset with two levels - ?weekday? and ?weekend? indicating whether a given date is a weekday or weekend day.
 
 ```{r}
 
@@ -184,11 +200,6 @@ StepsPerInterval.weekday <- tapply(activity.imputed[activity.imputed$day == "wee
 ```{r}
 par(mfrow=c(1,2))
 
-```
-
-# Plot weekday activity
-
-```{r}
   plot(as.numeric(names(StepsPerInterval.weekday)), 
 	StepsPerInterval.weekday, 
 	xlab = "Interval", 
@@ -196,11 +207,7 @@ par(mfrow=c(1,2))
 	main = "Activity Pattern (Weekdays)", 
       type = "l")
 
-```
- 
-# Plot weekend activity
 
-```{r}
 plot(as.numeric(names(StepsPerInterval.weekend)), 
 	StepsPerInterval.weekend, 
 	xlab = "Interval", 
